@@ -1,4 +1,4 @@
-from day_2.script import prep_table, get_diff_of_rows, get_even_divisor_diff
+from day_2.script import prep_table_from_string, get_diff_of_rows, get_even_divisor_diff
 
 table = "5 1 9 5 \n" \
          "7 5 3 \n" \
@@ -28,7 +28,7 @@ check = """121	59	141	21	120	67	58	49	22	46	56	112	53	111	104	130
 
 
 def test_prep_table():
-    res = prep_table(table)
+    res = prep_table_from_string(table)
     assert res == [[5, 1, 9, 5], [7, 5, 3], [2, 4, 6, 8]]
 
 
