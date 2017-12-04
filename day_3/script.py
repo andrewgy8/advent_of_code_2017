@@ -9,10 +9,10 @@ def main(n):
     offset = cycle % (odd_square-1)
     return arm + abs(offset-arm)
 
-coords = [(1, 0), (1, -1), (0, -1), (-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1)]
-
 
 def main_2(n):
+    coords = [(1, 0), (1, -1), (0, -1), (-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1)]
+
     x = y = dx = 0
     dy = -1
     grid = dict()
@@ -26,8 +26,6 @@ def main_2(n):
             curr_pos = (x0+x, y0+y)
             if curr_pos in grid:
                 total += grid[curr_pos]
-            # print(total)
-            # print(n)
 
         if total > n:
             return total
