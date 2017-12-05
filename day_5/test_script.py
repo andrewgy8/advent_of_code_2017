@@ -10,6 +10,6 @@ def test_main():
 
 
 def test_main_two():
-    w = Walker(i)
-    res = w.main_2()
+    w = Walker(i, True)
+    res = w.main()
     assert res == 10
