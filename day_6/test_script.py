@@ -1,7 +1,6 @@
 from day_6.script import Redistribution
 
 
-
 def test_main():
     lst = [0, 2, 7, 0]
 

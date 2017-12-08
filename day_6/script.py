@@ -34,12 +34,12 @@ class Redistribution:
             return True
         return False
 
-    def cycle_from(self, func, start_index):
-        nxt_index = start_index
-        times = self.dist[start_index]
-        self.dist[start_index] = 0
+    def cycle_from(self, func, start):
+        nxt_index = start
+        until = self.dist[start]
+        self.dist[start] = 0
 
-        for _ in range(0, times):
+        for _ in range(0, until):
             nxt_index += 1
             if nxt_index >= len(self.dist):
                 nxt_index = 0
