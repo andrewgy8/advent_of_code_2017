@@ -38,6 +38,7 @@ def parse(cmd):
         return diff
     return 0
 
+
 def get_max_val():
     return max(values, key=lambda key: values[key])
 
