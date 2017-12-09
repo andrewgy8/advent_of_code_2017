@@ -4,11 +4,8 @@ def get_file_and_format():
 
 
 class Counter:
-    count = 0
-    group_lvl = 0
-    garbage_count = 0
-    in_garbage = False
-    escaped = False
+    count = group_lvl = garbage_count = 0
+    in_garbage = escaped = False
 
     def __init__(self, input_str):
         self.input_str = list(input_str)
@@ -24,7 +21,8 @@ class Counter:
                 self.group_counter(v)
 
     def determine_escapism(self, v, i):
-        if self.input_str[i - 1] == '!':
+        prev_val = self.input_str[i - 1] == '!'
+        if prev_val:
             if v == '!':
                 self.input_str[i] = 'N'
             return True
