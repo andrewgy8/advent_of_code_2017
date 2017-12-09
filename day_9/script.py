@@ -5,7 +5,7 @@ def get_file_and_format():
 
 class Counter:
     count = 0
-    last_count = 0
+    group_lvl = 0
     garbage_count = 0
     in_garbage = False
     escaped = False
@@ -13,43 +13,49 @@ class Counter:
     def __init__(self, input_str):
         self.input_str = list(input_str)
 
-    def parse(self):
+    def main(self):
         for i, v in enumerate(self.input_str):
+
+            self.escaped = self.determine_escapism(v, i)
+
+            if self.in_garbage:
+                self.in_garbage = self.garbage_processor(v)
+            else:
+                self.group_counter(v)
+
+    def determine_escapism(self, v, i):
+        if self.input_str[i - 1] == '!':
             if v == '!':
-                if self.input_str[i - 1] == '!':
-                    self.escaped = True
-                    self.input_str[i] = 'N'
-                elif not self.escaped and self.input_str[i - 1] == '!':
-                    self.escaped = True
-            elif self.input_str[i - 1] == '!':
-                self.escaped = True
-            elif self.input_str[i - 1] != '!':
-                self.escaped = False
-            else:
-                self.escaped = False
+                self.input_str[i] = 'N'
+            return True
+        return False
 
-            if not self.in_garbage:
-                if v == '{' and not self.escaped:
-                    self.last_count += 1
+    def garbage_processor(self, v):
+        if self.escaped:
+            return self.in_garbage
 
-                elif v == '}' and not self.escaped:
-                    self.count += self.last_count
-                    self.last_count -= 1
-                    if self.last_count < 0:
-                        self.last_count = 0
-                elif v == '<' and not self.escaped:
-                    self.in_garbage = True
-            else:
-                if v == '>' and not self.escaped:
-                    self.in_garbage = False
-                elif not self.escaped and v != '!':
-                    self.garbage_count += 1
-                    self.in_garbage = True
+        if v == '>':
+            return False
+        elif v != '!':
+            self.garbage_count += 1
+            return True
+        return self.in_garbage
 
-        return self.count
+    def group_counter(self, v):
+        if self.escaped:
+            return
+
+        if v == '{':
+            self.group_lvl += 1
+        elif v == '}':
+            self.count += self.group_lvl
+            self.group_lvl -= 1
+        elif v == '<':
+            self.in_garbage = True
+
 
 f = get_file_and_format()
 c = Counter(f)
-res = c.parse()
-print(c.count)
-print(c.garbage_count)
+c.main()
+print("Full group count: ", c.count)
+print("Garbage character count: ", c.garbage_count)
