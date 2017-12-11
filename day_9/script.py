@@ -3,7 +3,7 @@ def get_file_and_format():
         return f.read()
 
 
-class Counter:
+class GarbageCleaner:
     count = group_lvl = garbage_count = 0
     in_garbage = escaped = False
 
@@ -53,7 +53,7 @@ class Counter:
 
 
 f = get_file_and_format()
-c = Counter(f)
+c = GarbageCleaner(f)
 c.main()
 print("Full group count: ", c.count)
 print("Garbage character count: ", c.garbage_count)
