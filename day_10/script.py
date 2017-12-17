@@ -5,7 +5,7 @@ def reverse(text, repeat):
     knot = list(range(256))
     pos = 0
     skip = 0
-    for isntevenused in range(repeat):
+    for _ in range(repeat):
         for i in text:
             temp = []
             for j in range(i):
